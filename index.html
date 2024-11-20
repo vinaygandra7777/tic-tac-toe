@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400;1,500;1,700;1,800;1,900&family=Alumni+Sans+Pinstripe:ital@0;1&family=Cagliostro&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Delius+Unicase:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oi&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background-color: #5C5C99;
+            position: relative;
+            font-family: "Delius Unicase", cursive;
+            font-weight: 800;
+            font-style: normal;
+            overflow-y: hidden;
+        }
+        /* .cont{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        } */
+
+        .container{
+            display: grid;
+            grid-template-columns:auto auto auto;
+            gap: 3px;
+            width:30vw;
+            margin-left: 35%;
+
+        }
+        input{
+            height: 18vh;
+            width:9vw;
+            background-color:#292966;
+            border-radius: 30px;
+            border:1px solid palevioletred;
+            overflow: hidden;
+        }
+        input:hover{
+            cursor: pointer;
+        }
+        .child1{
+            font-size: 4em;
+            text-align: center;
+            font-weight: 800;
+            color: white;
+            text-shadow: 1px 1px 5px white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #print{
+            font-size: 2.5em;
+            text-align: center;
+            font-family: "Delius Unicase", cursive;
+            font-weight: 400;
+            font-style: normal;
+
+        }
+        button{
+            padding: 20px;
+            background-color:#A3A3CC;
+            color: white;
+            border-radius: 50px;
+            margin-left: 42%;
+            width:15vw;
+            font-size: 2em;
+            border: none;
+            position: absolute;
+            font-family: "Delius Unicase", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
+        @media (width<=600px){
+            input{
+                width:20vw;
+                height:15vh
+            }
+            button{
+                width:39vw;
+                margin-left: 30%;
+                /* margin-top: 10%; */
+            }
+            .container{
+                margin-top: 10%;
+                margin-left: 15%;
+            }
+            h1{
+                margin-top: 15%;
+            }
+        }
+    </style>
+</head>
+<body>
+        <h1 style="text-align: center; color: #CCCCFF;">TIC-TAC-TOE</h1>
+    <div class="cont">
+    <div class="container">
+        <div><input type="text" id="a1" onclick="fun1(); myfun();" readonly></div>
+        <div><input type="text" id="a2" onclick="fun2(); myfun();" readonly></div>
+        <div><input type="text" id="a3" onclick="fun3(); myfun();" readonly></div>
+        <div><input type="text" id="a4" onclick="fun4(); myfun();" readonly></div>
+        <div><input type="text" id="a5" onclick="fun5(); myfun();" readonly></div>
+        <div><input type="text" id="a6" onclick="fun6(); myfun();" readonly></div>
+        <div><input type="text" id="a7" onclick="fun7(); myfun();" readonly></div>
+        <div><input type="text" id="a8" onclick="fun8(); myfun();" readonly></div>
+        <div><input type="text" id="a9" onclick="fun9(); myfun();" readonly></div>
+    </div>
+    </div>
+    <p id='print'></p>
+    <p id="demo1"></p>
+    <button onclick="reset()">Reset</button>
+    <canvas id="conflit"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <script>
+        function conf(){
+            const jsConfetti = new JSConfetti()
+            jsConfetti.addConfetti()
+        }
+    </script>
+    <script>
+        function myfun() {
+ var a1 = document.getElementById("a1").value;
+ var a2 = document.getElementById("a2").value;
+ var a3 = document.getElementById("a3").value;
+ var a4 = document.getElementById("a4").value;
+ var a5 = document.getElementById("a5").value;
+ var a6 = document.getElementById("a6").value;
+ var a7 = document.getElementById("a7").value;
+ var a8 = document.getElementById("a8").value;
+ var a9 = document.getElementById("a9").value;
+ var button1 = document.getElementById("a1");
+ var button2 = document.getElementById("a2");
+ var button3 = document.getElementById("a3");
+ var button4 = document.getElementById("a4");
+ var button5 = document.getElementById("a5");
+ var button6 = document.getElementById("a6");
+ var button7 = document.getElementById("a7");
+ var button8 = document.getElementById("a8");
+ var button9 = document.getElementById("a9");
+
+if ((a1 == 'X') && (a2=='X') && (a3=='X')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player X won";
+    button4.disabled=true;
+    button5.disabled=true;
+    button6.disabled=true;
+    button7.disabled=true;
+    button8.disabled=true;
+    button9.disabled=true;
+    button1.style.background="green";
+    button2.style.background="green";
+    button3.style.background="green";
+}
+else if 
+((a4 == 'X') && (a5=='X') && (a6=='X')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player X won";
+    button1.disabled=true;
+    button2.disabled=true;
+    button3.disabled=true;
+    button7.disabled=true;
+    button8.disabled=true;
+    button9.disabled=true;
+    button4.style.background="green";
+    button5.style.background="green";
+    button6.style.background="green";
+}
+else if((a7 == 'X') && (a8=='X') && (a9=='X')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player X won";
+    button4.disabled=true;
+    button5.disabled=true;
+    button6.disabled=true;
+    button1.disabled=true;
+    button2.disabled=true;
+    button3.disabled=true;
+    button7.style.background="green";
+    button8.style.background="green";
+    button9.style.background="green";
+}
+else if ((a3 == 'X') && (a6=='X') && (a9=='X')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player X won";
+    button1.disabled=true;
+    button2.disabled=true;
+    button4.disabled=true;
+    button7.disabled=true;
+    button8.disabled=true;
+    button5.disabled=true;
+    button6.style.background="green";
+    button9.style.background="green";
+    button3.style.background="green";
+}
+else if ((a3 == 'X') && (a5=='X') && (a7=='X')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player X won";
+    button1.disabled=true;
+    button5.disabled=true;
+    button8.disabled=true;
+    button2.disabled=true;
+    button6.disabled=true;
+    button9.disabled=true;
+    button3.style.background="green";
+    button5.style.background="green";
+    button7.style.background="green";
+}
+else if ((a1 == 'X') && (a5=='X') && (a9=='X')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player X won";
+    button2.disabled=true;
+    button3.disabled=true;
+    button6.disabled=true;
+    button7.disabled=true;
+    button8.disabled=true;
+    button4.disabled=true;
+    button1.style.background="green";
+    button5.style.background="green";
+    button9.style.background="green";
+}
+else if ((a2 == 'X') && (a5=='X') && (a8=='X')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player X won";
+    button4.disabled=true;
+    button1.disabled=true;
+    button6.disabled=true;
+    button3.disabled=true;
+    button7.disabled=true;
+    button9.disabled=true;
+    button2.style.background="green";
+    button5.style.background="green";
+    button8.style.background="green";
+}
+else if ((a1 == 'X') && (a4=='X') && (a7=='X')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player X won";
+    button2.disabled=true;
+    button5.disabled=true;
+    button6.disabled=true;
+    button3.disabled=true;
+    button8.disabled=true;
+    button9.disabled=true;
+    button1.style.background="green";
+    button4.style.background="green";
+    button7.style.background="green";
+}
+else if((a1 == '0') && (a2=='0') && (a3=='0')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player 0 won";
+    button4.disabled=true;
+    button5.disabled=true;
+    button6.disabled=true;
+    button7.disabled=true;
+    button8.disabled=true;
+    button9.disabled=true;
+    button1.style.background="green";
+    button2.style.background="green";
+    button3.style.background="green";
+}
+else if 
+((a4 == '0') && (a5=='0') && (a6=='0')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player 0 won";
+    button1.disabled=true;
+    button2.disabled=true;
+    button3.disabled=true;
+    button7.disabled=true;
+    button8.disabled=true;
+    button9.disabled=true;
+    button4.style.background="green";
+    button5.style.background="green";
+    button6.style.background="green";
+}
+else if((a7 == '0') && (a8=='0') && (a9=='0')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player 0 won";
+    button4.disabled=true;
+    button5.disabled=true;
+    button6.disabled=true;
+    button1.disabled=true;
+    button2.disabled=true;
+    button3.disabled=true;
+    button7.style.background="green";
+    button8.style.background="green";
+    button9.style.background="green";
+}
+else if ((a3 == '0') && (a6=='0') && (a9=='0')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player 0 won";
+    button1.disabled=true;
+    button2.disabled=true;
+    button4.disabled=true;
+    button7.disabled=true;
+    button8.disabled=true;
+    button5.disabled=true;
+    button6.style.background="green";
+    button9.style.background="green";
+    button3.style.background="green";
+}
+else if ((a3 == '0') && (a5=='0') && (a7=='0')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player 0 won";
+    button1.disabled=true;
+    button5.disabled=true;
+    button8.disabled=true;
+    button2.disabled=true;
+    button6.disabled=true;
+    button9.disabled=true;
+    button3.style.background="green";
+    button5.style.background="green";
+    button7.style.background="green";
+}
+else if ((a1 == '0') && (a5=='0') && (a9=='0')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player 0 won";
+    button2.disabled=true;
+    button3.disabled=true;
+    button6.disabled=true;
+    button7.disabled=true;
+    button8.disabled=true;
+    button4.disabled=true;
+    button1.style.background="green";
+    button5.style.background="green";
+    button9.style.background="green";
+}
+else if ((a2 == '0') && (a5=='0') && (a8=='0')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player 0 won";
+    button4.disabled=true;
+    button1.disabled=true;
+    button6.disabled=true;
+    button3.disabled=true;
+    button7.disabled=true;
+    button9.disabled=true;
+    button2.style.background="green";
+    button5.style.background="green";
+    button8.style.background="green";
+}
+else if ((a1 == '0') && (a4=='0') && (a7=='0')) {
+    document.getElementById('conflit').innerHTML=conf();
+    document.getElementById('print')
+        .innerHTML = "Player 0 won";
+    button2.disabled=true;
+    button5.disabled=true;
+    button6.disabled=true;
+    button3.disabled=true;
+    button8.disabled=true;
+    button9.disabled=true;
+    button1.style.background="green";
+    button4.style.background="green";
+    button7.style.background="green";
+}
+
+
+else if ((a1 == 'X' || a1 == '0') && (a1 == 'X'
+    || a2== '0') && (a3 == 'X' || a3 == '0') &&
+    (a4 == 'X' || a4 == '0') && (a5 == 'X' ||
+        a5 == '0') && (a6 == 'X' || a6 == '0') &&
+    (a7 == 'X' || a7 == '0') && (a8 == 'X' ||
+        a8 == '0') && (a9 == 'X' || a9 == '0')) {
+    document.getElementById('print')
+        .innerHTML = "Match Tie";
+}
+else {
+    if (flag == 1) {
+        document.getElementById('print')
+            .innerHTML = "Player X Turn";
+    }
+    else {
+        document.getElementById('print')
+            .innerHTML = "Player 0 Turn";
+    }
+}
+}
+
+
+function reset() {
+location.reload();
+a1=a2=a3=a4=a5=a6=a7=a8=a9=" ";
+}
+
+flag = 1;
+function fun1() {
+if (flag == 1) {
+    document.getElementById("a1").value="X";
+    document.getElementById("a1").disabled = true;
+    document.getElementById("a1").classList.add("child1")
+    flag = 0;
+}
+else {
+    document.getElementById("a1").value = "0";
+    document.getElementById("a1").disabled = true;
+    document.getElementById("a1").classList.add("child1")
+    flag = 1;
+}
+}
+
+function fun2() {
+if (flag == 1) {
+    document.getElementById("a2").value = "X";
+    document.getElementById("a2").disabled = true;
+    document.getElementById("a2").classList.add("child1")
+    flag = 0;
+}
+else {
+    document.getElementById("a2").value = "0";
+    document.getElementById("a2").disabled = true;
+    document.getElementById("a2").classList.add("child1")
+    flag = 1;
+}
+}
+function fun3() {
+if (flag == 1) {
+    document.getElementById("a3").value = "X";
+    document.getElementById("a3").disabled = true;
+    document.getElementById("a3").classList.add("child1")
+    flag = 0;
+}
+else {
+    document.getElementById("a3").value = "0";
+    document.getElementById("a3").disabled = true;
+    document.getElementById("a3").classList.add("child1")
+    flag = 1;
+}
+}
+function fun4() {
+if (flag == 1) {
+    document.getElementById("a4").value = "X";
+    document.getElementById("a4").disabled = true;
+    document.getElementById("a4").classList.add("child1")
+    flag = 0;
+}
+else {
+    document.getElementById("a4").value = "0";
+    document.getElementById("a4").disabled = true;
+    document.getElementById("a4").classList.add("child1")
+    flag = 1;
+}
+}
+function fun5() {
+if (flag == 1) {
+    document.getElementById("a5").value = "X";
+    document.getElementById("a5").disabled = true;
+    document.getElementById("a5").classList.add("child1")
+    flag = 0;
+}
+else {
+    document.getElementById("a5").value = "0";
+    document.getElementById("a5").disabled = true;
+    document.getElementById("a5").classList.add("child1")
+    flag = 1;
+}
+}
+function fun6() {
+if (flag == 1) {
+    document.getElementById("a6").value = "X";
+    document.getElementById("a6").disabled = true;
+    document.getElementById("a6").classList.add("child1")
+    flag = 0;
+}
+else {
+    document.getElementById("a6").value = "0";
+    document.getElementById("a6").disabled = true;
+    document.getElementById("a6").classList.add("child1")
+    flag = 1;
+}
+}
+function fun7() {
+if (flag == 1) {
+    document.getElementById("a7").value = "X";
+    document.getElementById("a7").disabled = true;
+    document.getElementById("a7").classList.add("child1")
+    flag = 0;
+}
+else {
+    document.getElementById("a7").value = "0";
+    document.getElementById("a7").disabled = true;
+    document.getElementById("a7").classList.add("child1")
+    flag = 1;
+}
+}
+function fun8() {
+if (flag == 1) {
+    document.getElementById("a8").value = "X";
+    document.getElementById("a8").disabled = true;
+    document.getElementById("a8").classList.add("child1")
+    flag = 0;
+}
+else {
+    document.getElementById("a8").value = "0";
+    document.getElementById("a8").disabled = true;
+    document.getElementById("a8").classList.add("child1")
+    flag = 1;
+}
+}
+
+function fun9() {
+if (flag == 1) {
+    document.getElementById("a9").value = "X";
+    document.getElementById("a9").disabled = true;
+    document.getElementById("a9").classList.add("child1")
+    flag = 0;
+}
+else {
+    document.getElementById("a9").value = "0";
+    document.getElementById("a9").disabled = true;
+    document.getElementById("a9").classList.add("child1")
+    flag = 1;
+}
+}
+
+    </script>
+</body>
+</html>
